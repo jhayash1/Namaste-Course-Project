@@ -1,36 +1,44 @@
-// const heading = React.createElement('h1',{id:'heading'},'Hello world')
-const parent= React.createElement('div', {id:'heading'},[
-    React.createElement('div' , {id : 'child1'},[
-        React.createElement('h1' ,{} , 'hello React'),
-    React.createElement('h2' ,{} , 'hello React2'),
-    ]),
-    React.createElement('div',{id:'child2'},[
-        React.createElement('h1' ,{} , 'hello React3'),
-    React.createElement('h2' ,{} , 'hello React4'),
-    ]),
-    React.createElement('div',{id:'child2'},[
-        React.createElement('h1' ,{} , 'hello React3'),
-    React.createElement('h2' ,{} , 'hello React4'),
-    ]),
-    React.createElement('div',{id:'child2'},[
-        React.createElement('h1' ,{} , 'hello React3'),
-    React.createElement('h2' ,{} , 'hello React4'),
-    ]),
-    React.createElement('div',{id:'child2'},[
-        React.createElement('h1' ,{} , 'hello React3'),
-    React.createElement('h2' ,{} , 'hello React4'),
-    ]),
-    React.createElement('div',{id:'child2'},[
-        React.createElement('h1' ,{} , 'hello React3'),
-    React.createElement('h2' ,{} , 'hello React4'),
-    ]),
-    React.createElement('div',{id:'child2'},[
-        React.createElement('h1' ,{} , 'hello React3'),
-    React.createElement('h2' ,{} , 'hello React4'),
-    ])
+import React from "react"
+import ReactDOM from "react-dom/client"
+import { Body } from "./component/Body"
+import { createBrowserRouter, RouterProvider,Outlet } from "react-router-dom"
+import { Error } from "./component/Error"
+import { Navbar } from "./component/Navbar"
+import { RestaurantMenu } from "./component/RestaurantMenu"
+import About from "./component/About"
+
+
+const App =()=>{
+    return(
+        <>
+            <Navbar/>
+            <Outlet/>
+        </>
+    )
+}
+
+const appRouter = createBrowserRouter([
+    {
+        path:'/',
+        element:<App/>,
+        children: [
+            {
+                path:'/',
+                element:<Body/>
+            },
+            {
+                path:'/about',
+                element:<About/>
+            },
+            {
+                path:'/restaurant/:resId',
+                element:<RestaurantMenu/>
+            }
+        ],
+        errorElement:<Error/>
+    },
+    
 ])
 
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'))
-root.render(parent)
+root.render(<RouterProvider router={appRouter}/>)
