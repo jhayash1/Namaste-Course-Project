@@ -2,19 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Shemmer } from './Shemmer'
 import { useParams } from 'react-router-dom'
 
-export const RestaurantMenu = () => {
-    const [resInfo, setResInfo] = useState(null)
-    const { resId } = useParams()
+import useResMenu from './constants/useResMenu'
 
-    useEffect(() => {
-        fetchData()
-    }, [])
-    const fetchData = async () => {
-        const data = await fetch(`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=26.49690&lng=80.32460&restaurantId=${resId}&catalog_qa=undefined&isMenuUx4=true`)
-        const json = await data.json()
-        console.log(json.data.cards)
-        setResInfo(json.data)
-    }
+export const RestaurantMenu = () => {
+    const { resId } = useParams()
+    const resInfo = useResMenu(resId)
+
+   
 
     if (resInfo === null) return <Shemmer />
 

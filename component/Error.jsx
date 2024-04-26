@@ -7,7 +7,7 @@ export const Error = () => {
   return (
     <div>
         <h1>{err.status} : {err.statusText}</h1>
-        <h2>URL to sahi se daal!!</h2>
+        <h2>An error occurred while processing your request.</h2>
     </div>
   )
 }

@@ -4,23 +4,31 @@ import Class from './Class'
 class About extends React.Component{
   constructor(props){
     super(props)
-    console.log('Parent constructor')
+    this.state = {
+      userInfo:{
+        name:'Dummy',
+        location:'Default'
+      }
+    }
   }
-  componentDidMount(){
-    console.log('Parent componentDid mount')
+  async componentDidMount(){
+    const data = await fetch('https://api.github.com/users/jhayash1')
+    const json = await data.json()
+    this.setState({
+      userInfo:json
+    })
+    console.log(json)
 
   }
   componentDidUpdate(){
-    console.log('component did update')
   }
   render(){
-    console.log('Parent render')
-
+      const {name, location,login,avatar_url} = this.state.userInfo
     return (
       <div>
-        <Class name="Child"/>
-        <Class name="Child 2"/>
-        <Class name="Child 3"/>
+        <img src={avatar_url}/>
+        <p>{name}</p>
+        <p>{location}</p>
       </div>
     )
   }
