@@ -5,7 +5,7 @@ class Class extends React.Component{
         super(props)
         console.log(this.props.name + ' Constructor');
     }
-    componentDidMount(){
+    async componentDidMount(){
         console.log(this.props.name + ' component');
     }
     render(){
